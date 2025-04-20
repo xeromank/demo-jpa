@@ -1,0 +1,8 @@
+[
+  {
+    "name": "com.example.demo.model.User",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  }
+]
