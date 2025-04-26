@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mysql:
     image: mysql:8
@@ -15,6 +13,27 @@ services:
       - mysql-data:/var/lib/mysql
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     restart: always
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ptest" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  demo-jpa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+#    image: demo-jpa:latest
+    container_name: demo-jpa
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/test?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: test
+      SPRING_DATASOURCE_PASSWORD: test
+    depends_on:
+      mysql:
+        condition: service_healthy
 
 volumes:
   mysql-data:
