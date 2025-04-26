@@ -26,7 +26,10 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
 
     // H2 데이터베이스
-    runtimeOnly("com.h2database:h2")
+    // runtimeOnly("com.h2database:h2")
+
+    // MySQL 데이터베이스
+    runtimeOnly("com.mysql:mysql-connector-j")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
