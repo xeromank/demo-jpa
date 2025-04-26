@@ -44,3 +44,11 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks.named<org.springframework.boot.gradle.tasks.bundling.BootBuildImage>("bootBuildImage") {
+    imageName.set("demo-jpa:latest")
+    environment.set(mapOf(
+        "BP_NATIVE_IMAGE_BUILD_ARGUMENTS" to "-Ob -H:+ReportExceptionStackTraces --initialize-at-build-time=org.slf4j.MDC",
+        "BP_NATIVE_IMAGE_MEMORY_HINT" to "8G"
+    ))
+}
