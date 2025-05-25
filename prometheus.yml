@@ -1,0 +1,8 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'spring-demo-jpa'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['demo-jpa:8080']

@@ -20,10 +20,10 @@ services:
       retries: 5
 
   demo-jpa:
-    build:
-      context: .
-      dockerfile: Dockerfile
-#    image: demo-jpa:latest
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+    image: demo-jpa:latest
     container_name: demo-jpa
     ports:
       - "8080:8080"
@@ -34,6 +34,26 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+  prometheus:
+    image: prom/prometheus:v2.37.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - demo-jpa
 
+  grafana:
+    image: grafana/grafana:9.1.0
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
 volumes:
   mysql-data:
+  grafana-data:
