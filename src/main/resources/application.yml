@@ -16,6 +16,16 @@ spring:
       mode: always
       platform: mysql
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
 logging:
   level:
     org:
