@@ -29,6 +29,7 @@ management:
       export:
         enabled: true
 
+
 logging:
   level:
     org:
@@ -38,3 +39,16 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+otel:
+  service:
+    name: demo-jpa
+  exporter:
+    otlp:
+      endpoint: https://otlp.nr-data.net:4318
+      headers:
+        api-key: ${NEW_RELIC_KEY}
+      compression: gzip
+  traces:
+    exporter: otlp
+  metrics:
+    exporter: otlp

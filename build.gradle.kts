@@ -15,6 +15,12 @@ repositories {
     mavenCentral()
 }
 
+dependencyManagement {
+    imports {
+        mavenBom("io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom:2.16.0")
+    }
+}
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -28,13 +34,13 @@ dependencies {
     // Swagger UI
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
 
-    // H2 데이터베이스
-    // runtimeOnly("com.h2database:h2")
-
     // MySQL 데이터베이스
     runtimeOnly("com.mysql:mysql-connector-j")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    implementation("io.opentelemetry.instrumentation:opentelemetry-spring-boot-starter")
+    implementation("io.opentelemetry:opentelemetry-sdk-extension-autoconfigure")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {

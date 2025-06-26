@@ -20,10 +20,10 @@ services:
       retries: 5
 
   demo-jpa:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-    image: demo-jpa:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+#    image: demo-jpa:latest
     container_name: demo-jpa
     ports:
       - "8080:8080"
